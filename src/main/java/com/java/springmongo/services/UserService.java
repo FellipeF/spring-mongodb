@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.springmongo.domain.User;
+import com.java.springmongo.dto.UserDTO;
 import com.java.springmongo.repository.UserRepository;
 import com.java.springmongo.services.exception.ObjectNotFoundException;
 
@@ -27,6 +28,16 @@ public class UserService {
 		// A container object which may or may not contain a non-null value. 
 		Optional<User> u = rep.findById(id);
 		return u.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+	}
+	
+	public User insert (User u)
+	{
+		return rep.insert(u);
+	}
+	
+	public User fromDTO(UserDTO dto)
+	{
+		return new User(dto.getId(), dto.getName(), dto.getEmail());
 	}
 	
 }
