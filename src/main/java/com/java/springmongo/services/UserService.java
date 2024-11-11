@@ -41,6 +41,20 @@ public class UserService {
 		rep.deleteById(id);
 	}
 	
+	public User update(User u)
+	{
+		User newUser = findById(u.getId());
+		updateData(newUser, u);	//Copy from u to newUser
+		return rep.save(newUser);
+	}
+
+
+	private void updateData(User newUser, User u) {
+		newUser.setName(u.getName());
+		newUser.setEmail(u.getEmail());
+	}
+
+
 	public User fromDTO(UserDTO dto)
 	{
 		return new User(dto.getId(), dto.getName(), dto.getEmail());
